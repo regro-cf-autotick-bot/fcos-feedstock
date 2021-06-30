@@ -63,6 +63,9 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13256&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/fcos-feedstock?branchName=master&jobName=linux&configuration=linux_64_cuda_compiler_version11.0numpy1.19python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>linux_64_cuda_compiler_version11.1numpy1.17python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=13256&branchName=master">
