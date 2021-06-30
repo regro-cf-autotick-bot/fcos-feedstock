@@ -28,7 +28,7 @@ requirements:
   run:
     - acrv_datasets
     - {{ pin_compatible('numpy') }}
-    - opencv
+    - py-opencv
     - pycocotools
     - python
     - pytorch >=1.8.0=cuda*
