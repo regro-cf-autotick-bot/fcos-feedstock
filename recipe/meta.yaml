@@ -42,10 +42,6 @@ requirements:
 test:
   imports:
     - fcos
-  commands:
-    - pip check
-  requires:
-    - pip
 
 about:
   home: https://github.com/best-of-acrv/{{ name }}
