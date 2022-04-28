@@ -1,5 +1,5 @@
 diff --git a/fcos/core/csrc/cuda/ROIAlign_cuda.cu b/fcos/core/csrc/cuda/ROIAlign_cuda.cu
-index 930e836..2e57076 100644
+index 930e836..4f662e4 100644
 --- a/fcos/core/csrc/cuda/ROIAlign_cuda.cu
 +++ b/fcos/core/csrc/cuda/ROIAlign_cuda.cu
 @@ -1,8 +1,9 @@
@@ -18,7 +18,7 @@ index 930e836..2e57076 100644
    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
  
 -  dim3 grid(std::min(THCCeilDiv((long)output_size, 512L), 4096L));
-+  dim3 grid(std::min(ceil_div((long)output_size, 512L), 4096L));
++  dim3 grid(std::min(at::ceil_div((long)output_size, 512L), 4096L));
    dim3 block(512);
  
    if (output.numel() == 0) {
@@ -41,7 +41,7 @@ index 930e836..2e57076 100644
    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
  
 -  dim3 grid(std::min(THCCeilDiv((long)grad.numel(), 512L), 4096L));
-+  dim3 grid(std::min(ceil_div((long)grad.numel(), 512L), 4096L));
++  dim3 grid(std::min(at::ceil_div((long)grad.numel(), 512L), 4096L));
    dim3 block(512);
  
    // handle possibly empty gradients
@@ -60,7 +60,7 @@ index 930e836..2e57076 100644
    return grad_input;
  }
 diff --git a/fcos/core/csrc/cuda/ROIPool_cuda.cu b/fcos/core/csrc/cuda/ROIPool_cuda.cu
-index 85210fe..fdadff5 100644
+index 85210fe..b47001f 100644
 --- a/fcos/core/csrc/cuda/ROIPool_cuda.cu
 +++ b/fcos/core/csrc/cuda/ROIPool_cuda.cu
 @@ -1,8 +1,9 @@
@@ -79,7 +79,7 @@ index 85210fe..fdadff5 100644
    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
  
 -  dim3 grid(std::min(THCCeilDiv((long)output_size, 512L), 4096L));
-+  dim3 grid(std::min(ceil_div((long)output_size, 512L), 4096L));
++  dim3 grid(std::min(at::ceil_div((long)output_size, 512L), 4096L));
    dim3 block(512);
  
    if (output.numel() == 0) {
@@ -102,7 +102,7 @@ index 85210fe..fdadff5 100644
    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
  
 -  dim3 grid(std::min(THCCeilDiv((long)grad.numel(), 512L), 4096L));
-+  dim3 grid(std::min(ceil_div((long)grad.numel(), 512L), 4096L));
++  dim3 grid(std::min(at::ceil_div((long)grad.numel(), 512L), 4096L));
    dim3 block(512);
  
    // handle possibly empty gradients
@@ -121,7 +121,7 @@ index 85210fe..fdadff5 100644
    return grad_input;
  }
 diff --git a/fcos/core/csrc/cuda/SigmoidFocalLoss_cuda.cu b/fcos/core/csrc/cuda/SigmoidFocalLoss_cuda.cu
-index d8ca726..3f19b8b 100644
+index d8ca726..8adf4ee 100644
 --- a/fcos/core/csrc/cuda/SigmoidFocalLoss_cuda.cu
 +++ b/fcos/core/csrc/cuda/SigmoidFocalLoss_cuda.cu
 @@ -4,8 +4,9 @@
@@ -140,7 +140,7 @@ index d8ca726..3f19b8b 100644
    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
  
 -  dim3 grid(std::min(THCCeilDiv((long)losses_size, 512L), 4096L));
-+  dim3 grid(std::min(ceil_div((long)losses_size, 512L), 4096L));
++  dim3 grid(std::min(at::ceil_div((long)losses_size, 512L), 4096L));
    dim3 block(512);
  
    if (losses.numel() == 0) {
@@ -163,7 +163,7 @@ index d8ca726..3f19b8b 100644
    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
  
 -  dim3 grid(std::min(THCCeilDiv((long)d_logits_size, 512L), 4096L));
-+  dim3 grid(std::min(ceil_div((long)d_logits_size, 512L), 4096L));
++  dim3 grid(std::min(at::ceil_div((long)d_logits_size, 512L), 4096L));
    dim3 block(512);
  
    if (d_logits.numel() == 0) {
@@ -208,7 +208,7 @@ index 554f9d4..ee43e62 100644
  
  #include <vector>
 diff --git a/fcos/core/csrc/cuda/ml_nms.cu b/fcos/core/csrc/cuda/ml_nms.cu
-index d13d7df..f48c64b 100644
+index d13d7df..7422689 100644
 --- a/fcos/core/csrc/cuda/ml_nms.cu
 +++ b/fcos/core/csrc/cuda/ml_nms.cu
 @@ -1,8 +1,9 @@
@@ -227,7 +227,7 @@ index d13d7df..f48c64b 100644
        }
      }
 -    const int col_blocks = THCCeilDiv(n_boxes, threadsPerBlock);
-+    const int col_blocks = ceil_div(n_boxes, threadsPerBlock);
++    const int col_blocks = at::ceil_div(n_boxes, threadsPerBlock);
      dev_mask[cur_box_idx * col_blocks + col_start] = t;
    }
  }
@@ -236,7 +236,7 @@ index d13d7df..f48c64b 100644
    int boxes_num = boxes.size(0);
  
 -  const int col_blocks = THCCeilDiv(boxes_num, threadsPerBlock);
-+  const int col_blocks = ceil_div(boxes_num, threadsPerBlock);
++  const int col_blocks = at::ceil_div(boxes_num, threadsPerBlock);
  
    scalar_t* boxes_dev = boxes_sorted.data<scalar_t>();
  
@@ -251,8 +251,8 @@ index d13d7df..f48c64b 100644
  
 -  dim3 blocks(THCCeilDiv(boxes_num, threadsPerBlock),
 -              THCCeilDiv(boxes_num, threadsPerBlock));
-+  dim3 blocks(ceil_div(boxes_num, threadsPerBlock),
-+              ceil_div(boxes_num, threadsPerBlock));
++  dim3 blocks(at::ceil_div(boxes_num, threadsPerBlock),
++              at::ceil_div(boxes_num, threadsPerBlock));
    dim3 threads(threadsPerBlock);
    ml_nms_kernel<<<blocks, threads>>>(boxes_num,
                                    nms_overlap_thresh,
@@ -266,7 +266,7 @@ index d13d7df..f48c64b 100644
                          sizeof(unsigned long long) * boxes_num * col_blocks,
                          cudaMemcpyDeviceToHost));
 diff --git a/fcos/core/csrc/cuda/nms.cu b/fcos/core/csrc/cuda/nms.cu
-index 077faa8..3b92198 100644
+index 077faa8..221d270 100644
 --- a/fcos/core/csrc/cuda/nms.cu
 +++ b/fcos/core/csrc/cuda/nms.cu
 @@ -1,8 +1,9 @@
@@ -285,7 +285,7 @@ index 077faa8..3b92198 100644
        }
      }
 -    const int col_blocks = THCCeilDiv(n_boxes, threadsPerBlock);
-+    const int col_blocks = ceil_div(n_boxes, threadsPerBlock);
++    const int col_blocks = at::ceil_div(n_boxes, threadsPerBlock);
      dev_mask[cur_box_idx * col_blocks + col_start] = t;
    }
  }
@@ -294,7 +294,7 @@ index 077faa8..3b92198 100644
    int boxes_num = boxes.size(0);
  
 -  const int col_blocks = THCCeilDiv(boxes_num, threadsPerBlock);
-+  const int col_blocks = ceil_div(boxes_num, threadsPerBlock);
++  const int col_blocks = at::ceil_div(boxes_num, threadsPerBlock);
  
    scalar_t* boxes_dev = boxes_sorted.data<scalar_t>();
  
@@ -309,8 +309,8 @@ index 077faa8..3b92198 100644
  
 -  dim3 blocks(THCCeilDiv(boxes_num, threadsPerBlock),
 -              THCCeilDiv(boxes_num, threadsPerBlock));
-+  dim3 blocks(ceil_div(boxes_num, threadsPerBlock),
-+              ceil_div(boxes_num, threadsPerBlock));
++  dim3 blocks(at::ceil_div(boxes_num, threadsPerBlock),
++              at::ceil_div(boxes_num, threadsPerBlock));
    dim3 threads(threadsPerBlock);
    nms_kernel<<<blocks, threads>>>(boxes_num,
                                    nms_overlap_thresh,
