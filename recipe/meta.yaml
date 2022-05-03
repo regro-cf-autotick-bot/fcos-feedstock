@@ -1,5 +1,5 @@
 {% set name = "fcos" %}
-{% set version = "0.9.6" %}
+{% set version = "0.9.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 32bdb6995c4ad2632403eb5b40636b4566e377736a7e0729d5863e7f8402daa4
+  sha256: 29153d4febfe82878cfe44720ae4f828024a10fb26234f004cf8255159220af8
+  patches:
+    - patches/migrate_from_THC_to_ATen_and_c10.patch
 
 build:
-  number: 3
+  number: 0
   skip: true  # [cuda_compiler_version == "None" or cuda_compiler_version == "10.2" or not linux]
 
 requirements:
@@ -40,10 +42,6 @@ requirements:
 test:
   imports:
     - fcos
-  commands:
-    - pip check
-  requires:
-    - pip
 
 about:
   home: https://github.com/best-of-acrv/{{ name }}
@@ -63,3 +61,4 @@ about:
 extra:
   recipe-maintainers:
     - btalb
+    - mikemhenry
