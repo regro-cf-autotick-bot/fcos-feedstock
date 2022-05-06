@@ -8,8 +8,6 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 1fe061baf2efcd77f78ac7ce8731deace99d6dad5a592387b2b8dab930a95d3a
-  patches:
-    - patches/migrate_from_THC_to_ATen_and_c10.patch
 
 build:
   number: 0
