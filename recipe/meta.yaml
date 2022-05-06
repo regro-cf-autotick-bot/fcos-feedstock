@@ -1,5 +1,5 @@
 {% set name = "fcos" %}
-{% set version = "0.9.7" %}
+{% set version = "0.9.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +7,16 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 29153d4febfe82878cfe44720ae4f828024a10fb26234f004cf8255159220af8
-  patches:
-    - patches/migrate_from_THC_to_ATen_and_c10.patch
+  sha256: 1fe061baf2efcd77f78ac7ce8731deace99d6dad5a592387b2b8dab930a95d3a
 
 build:
-  number: 1
+  number: 0
   skip: true  # [cuda_compiler_version == "None" or cuda_compiler_version == "10.2" or not linux]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - {{ compiler('cuda') }} 
+    - {{ compiler('cuda') }}
     - sysroot_linux-64 ==2.17
     - ninja
   host:
@@ -48,7 +46,7 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
-  summary: 'FCOS is a detector for efficiently predicting objects in images'
+  summary: FCOS is a detector for efficiently predicting objects in images
   description: |
     Fully convolutional one-stage object detection (FCOS) is a framework for
     per-pixel prediction of objects in images. FCOS doesn't rely on expensive
