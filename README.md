@@ -230,5 +230,6 @@ Feedstock Maintainers
 =====================
 
 * [@btalb](https://github.com/btalb/)
+* [@h-vetinari](https://github.com/h-vetinari/)
 * [@mikemhenry](https://github.com/mikemhenry/)
 
