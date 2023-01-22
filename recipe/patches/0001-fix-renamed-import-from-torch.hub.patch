@@ -1,0 +1,25 @@
+From b1ed0a94db3cc49135dcfbd13e842e33af847754 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Sun, 22 Jan 2023 12:51:15 +1100
+Subject: [PATCH] fix renamed import from torch.hub
+
+---
+ fcos/core/utils/model_zoo.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fcos/core/utils/model_zoo.py b/fcos/core/utils/model_zoo.py
+index bb57885..f3647cb 100644
+--- a/fcos/core/utils/model_zoo.py
++++ b/fcos/core/utils/model_zoo.py
+@@ -7,7 +7,7 @@ try:
+     from torch.utils.model_zoo import urlparse
+     from torch.utils.model_zoo import HASH_REGEX
+ except:
+-    from torch.hub import _download_url_to_file
++    from torch.hub import download_url_to_file
+     from torch.hub import urlparse
+     from torch.hub import HASH_REGEX
+ 
+-- 
+2.38.1.windows.1
+
