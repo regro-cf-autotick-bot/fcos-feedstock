@@ -38,6 +38,8 @@ requirements:
     - python
     - torchvision
     - yacs
+    # actually a run-dep of acrv_datasets
+    - setuptools
   run_constrained:
     - pytorch *=cuda*
 
