@@ -1,5 +1,7 @@
 {% set version = "0.9.8" %}
 
+{% set cuda_major = environ.get("cuda_compiler_version", "11.8").split(".")[0] | int %}
+
 package:
   name: fcos
   version: {{ version }}
@@ -29,6 +31,11 @@ requirements:
     - pytorch *=cuda*
     - numpy
     - ninja
+    {% if cuda_major >= 12 %}
+    - libcublas-dev
+    - libcusolver-dev
+    - libcusparse-dev
+    {% endif %}
   run:
     - acrv_datasets
     - {{ pin_compatible('numpy') }}
