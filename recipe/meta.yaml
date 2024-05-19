@@ -13,7 +13,7 @@ source:
     - patches/0001-fix-renamed-import-from-torch.hub.patch
 
 build:
-  number: 6
+  number: 7
   skip: true  # [not linux]
   # GPU-only package
   skip: true  # [cuda_compiler_version == "None"]
@@ -21,8 +21,8 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cuda') }}
-    - sysroot_linux-64 ==2.17
     - ninja
   host:
     - pip
