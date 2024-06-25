@@ -13,7 +13,7 @@ source:
     - patches/0001-fix-renamed-import-from-torch.hub.patch
 
 build:
-  number: 7
+  number: 8
   skip: true  # [not linux]
   # GPU-only package
   skip: true  # [cuda_compiler_version == "None"]
@@ -38,7 +38,6 @@ requirements:
     {% endif %}
   run:
     - acrv_datasets
-    - {{ pin_compatible('numpy') }}
     - py-opencv
     - pycocotools
     - python
