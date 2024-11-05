@@ -31,6 +31,7 @@ requirements:
     - pytorch *=cuda*
     - numpy
     - ninja
+    - setuptools
     {% if cuda_major >= 12 %}
     - libcublas-dev
     - libcusolver-dev
