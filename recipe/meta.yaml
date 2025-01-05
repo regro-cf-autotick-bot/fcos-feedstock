@@ -15,8 +15,8 @@ source:
 build:
   number: 11
   skip: true  # [not linux]
-  # GPU-only package
-  skip: true  # [cuda_compiler_version == "None"]
+  # GPU-only package; 11.8 not supported in pytorch anymore
+  skip: true  # [cuda_compiler_version in ("None", "11.8")]
 
 requirements:
   build:
